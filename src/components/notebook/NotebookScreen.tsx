@@ -4,7 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { TopBar } from "@/components/common/TopBar";
 import { glossaryList } from "@/data/glossary";
-import { STAGES } from "@/data/stages";
+import { ALL_STAGES } from "@/data/stages";
+import { stageTag } from "@/lib/stageLabel";
 import { useProgress } from "@/lib/progress";
 
 type Tab = "perspectives" | "terms";
@@ -14,7 +15,7 @@ export function NotebookScreen() {
   const { state, isCleared } = useProgress();
   const [tab, setTab] = useState<Tab>("perspectives");
   const found = glossaryList.filter((g) => state.terms.includes(g.key));
-  const gained = STAGES.filter((s) => isCleared(s.id)).length;
+  const gained = ALL_STAGES.filter((s) => isCleared(s.id)).length;
 
   return (
     <div className="min-h-dvh pb-16">
@@ -23,7 +24,7 @@ export function NotebookScreen() {
         <div role="tablist" className="glass flex rounded-full p-1">
           {(
             [
-              ["perspectives", `🔭 獲得した視点 ${gained}/6`],
+              ["perspectives", `🔭 獲得した視点 ${gained}/${ALL_STAGES.length}`],
               ["terms", `🔖 用語ノート ${found.length}/${glossaryList.length}`],
             ] as const
           ).map(([id, label]) => (
@@ -43,7 +44,7 @@ export function NotebookScreen() {
 
         {tab === "perspectives" ? (
           <ul className="mt-5 space-y-3 p-0">
-            {STAGES.map((s, i) => {
+            {ALL_STAGES.map((s, i) => {
               const ok = isCleared(s.id);
               const v = s.clear.perspective;
               return (
@@ -65,7 +66,7 @@ export function NotebookScreen() {
                     </span>
                     <div>
                       <p className={`text-[11px] font-extrabold tracking-[0.18em] ${ok ? "text-coral-600" : "text-paper-300/60"}`}>
-                        第{s.id}章 ・ {s.title}
+                        {stageTag(s)} ・ {s.title}
                       </p>
                       <p className={`font-display text-[19px] font-extrabold ${ok ? "text-ink-900" : "text-paper-300/60"}`}>
                         {ok ? v.name : "？？？"}

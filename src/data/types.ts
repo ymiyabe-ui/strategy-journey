@@ -245,7 +245,7 @@ export type Scene =
   | SummaryScene;
 
 // ───────── ステージ ─────────
-export type StageId = 1 | 2 | 3 | 4 | 5 | 6;
+export type StageId = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export interface Perspective {
   icon: string;
@@ -280,6 +280,8 @@ export interface Stage {
   /** 公開前のステージで見せる、出会う予定の用語ラベル */
   termPreview: string[];
   status: "ready" | "coming";
+  /** 最終総合ステージか（表示を「第N章」でなく「最終ステージ」にする） */
+  final?: boolean;
   scenes: Scene[];
   clear: ClearInfo;
 }

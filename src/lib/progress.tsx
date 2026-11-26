@@ -11,7 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import type { SavedState, StageId, StageProgress } from "@/data/types";
-import { STAGES, STAGE_IDS } from "@/data/stages";
+import { FINAL_STAGE, STAGES, STAGE_IDS, getStage } from "@/data/stages";
 import { clearState, emptyState, loadState, saveState } from "@/lib/storage";
 
 // ───────── reducer ─────────
@@ -154,7 +154,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     (id: number) => {
       const p = stageOf(state, id);
       if (p.cleared) return 1;
-      const stage = STAGES.find((s) => s.id === id);
+      const stage = getStage(id);
       if (!stage || stage.scenes.length === 0) return 0;
       // 最終場面に着いていても、クリア前は 0.95 で止める
       return Math.min(0.95, p.sceneIndex / stage.scenes.length);
@@ -171,7 +171,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       if (!stage || stage.scenes.length === 0) return acc;
       return acc + Math.min(0.95, p.sceneIndex / stage.scenes.length);
     }, 0);
-    const next = STAGE_IDS.find((id) => !stageOf(state, id).cleared) ?? null;
+    // 6章がすべて終わったら、次は最終ステージ（それもクリア済みなら null）
+    const next: StageId | null =
+      STAGE_IDS.find((id) => !stageOf(state, id).cleared) ?? (stageOf(state, FINAL_STAGE.id).cleared ? null : FINAL_STAGE.id);
     return {
       clearedCount,
       overallPercent: Math.round((sum / STAGE_IDS.length) * 100),

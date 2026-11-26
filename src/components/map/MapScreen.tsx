@@ -33,7 +33,7 @@ export function MapScreen() {
   };
 
   const lit = [...STAGES.map((s) => isCleared(s.id))].slice(0, 6);
-  const finalState: NodeState = allCleared ? "soon" : "locked";
+  const finalState = stateOf(FINAL_STAGE.id, FINAL_STAGE.status);
 
   return (
     <div className="min-h-dvh pb-24">
@@ -81,8 +81,8 @@ export function MapScreen() {
               icon={FINAL_STAGE.icon}
               accent={FINAL_STAGE.accent}
               state={finalState}
-              stars={0}
-              href="/final"
+              stars={stageProgress(FINAL_STAGE.id).stars}
+              href={`/stage/${FINAL_STAGE.id}`}
               onLockedTap={() => setToast("6つの章をすべてクリアすると、最終ステージが開きます")}
             />
           </div>

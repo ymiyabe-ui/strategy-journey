@@ -106,7 +106,7 @@ export function StartScreen() {
                 <p className="text-[11px] font-bold tracking-wider text-lantern-300">{who}の旅</p>
                 <p className="mt-0.5 text-[13.5px] font-bold text-paper-50">
                   進捗 {overallPercent}%
-                  {next ? ` ・ 次は第${next.id}章「${next.title}」` : " ・ すべての章をクリア！"}
+                  {next ? ` ・ 次は${next.final ? "最終ステージ" : `第${next.id}章`}「${next.title}」` : " ・ すべてクリア！"}
                 </p>
               </div>
               <Button size="lg" onClick={() => router.push("/map")}>

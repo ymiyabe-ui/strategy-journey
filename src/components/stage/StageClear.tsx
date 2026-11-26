@@ -9,6 +9,7 @@ import { ProgressBar } from "@/components/common/ProgressBar";
 import { Stars } from "@/components/common/Stars";
 import { getTerm } from "@/data/glossary";
 import { getStage } from "@/data/stages";
+import { stageEyebrow, stageTag } from "@/lib/stageLabel";
 import { useProgress } from "@/lib/progress";
 import { ActionBar } from "./ActionBar";
 import { GainedTerms, PerspectiveCard } from "./ClearParts";
@@ -45,7 +46,7 @@ export function StageClear({ stageId }: { stageId: number }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
           >
-            CHAPTER {stage.id} COMPLETE
+            {stageEyebrow(stage)} COMPLETE
           </motion.p>
           <motion.h1
             className="font-display mt-3 bg-gradient-to-b from-lantern-200 via-lantern-300 to-lantern-500 bg-clip-text text-[46px] font-extrabold leading-none tracking-[0.08em] text-transparent drop-shadow-[0_0_26px_rgba(255,194,71,0.45)] sm:text-[60px]"
@@ -61,7 +62,7 @@ export function StageClear({ stageId }: { stageId: number }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            {stage.icon} 第{stage.id}章「{stage.title}」
+            {stage.icon} {stageTag(stage)}「{stage.title}」
           </motion.p>
           <div className="mt-4 flex justify-center">
             <Stars value={p.stars} size={44} animate />
@@ -98,7 +99,7 @@ export function StageClear({ stageId }: { stageId: number }) {
           {next && (
             <p className="mt-3 flex items-center gap-2 text-[13.5px] font-bold text-paper-50">
               <span aria-hidden>🔓</span>
-              第{next.id}章「{next.title}」が開きました
+              {stageTag(next)}「{next.title}」が開きました
             </p>
           )}
           <p className="mt-1.5 text-[12.5px] leading-[1.8] text-paper-300/85">{stage.clear.teaser}</p>
@@ -115,7 +116,7 @@ export function StageClear({ stageId }: { stageId: number }) {
         </ButtonLink>
         {next?.status === "ready" && (
           <Button size="lg" className="flex-1 sm:max-w-[16rem]" onClick={() => router.push(`/stage/${next.id}`)}>
-            次の章へ ›
+            {next.final ? "最終ステージへ ›" : "次の章へ ›"}
           </Button>
         )}
       </ActionBar>

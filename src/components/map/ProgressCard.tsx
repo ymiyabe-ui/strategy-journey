@@ -24,7 +24,7 @@ export function ProgressCard() {
         <div>
           <p className="text-[11px] font-bold tracking-[0.2em] text-lantern-300">{who}の旅</p>
           <p className="font-display mt-0.5 text-[15px] font-bold text-paper-100">
-            {allCleared ? "すべての章を踏破！" : next ? `次は 第${next.id}章「${next.title}」` : "旅の途中"}
+            {next?.final ? "6つの章を踏破！ 最終ステージへ" : allCleared ? "すべてのステージを踏破！" : next ? `次は 第${next.id}章「${next.title}」` : "旅の途中"}
           </p>
         </div>
         <p className="font-display text-[44px] font-extrabold leading-none text-lantern-300">
@@ -38,13 +38,13 @@ export function ProgressCard() {
       <div className="mt-3 flex items-center justify-between text-[12.5px] font-bold text-paper-300/90">
         <span>クリア {clearedCount} / 6 章</span>
         <span>
-          ⭐ {stars} / 18
+          ⭐ {stars} / 21
         </span>
       </div>
 
       {next && next.status === "ready" && (
         <ButtonLink href={`/stage/${next.id}`} className="mt-4 w-full">
-          {state.stages[next.id]?.sceneIndex ? "つづきから ›" : "この章へ進む ›"}
+          {state.stages[next.id]?.sceneIndex ? "つづきから ›" : next.final ? "最終ステージへ進む ›" : "この章へ進む ›"}
         </ButtonLink>
       )}
     </motion.section>

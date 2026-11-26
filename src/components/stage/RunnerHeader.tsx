@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { stageTag } from "@/lib/stageLabel";
 import type { Stage } from "@/data/types";
 import { PHASES, phaseOf, type PhaseId } from "@/lib/phases";
 import { ProgressBar } from "@/components/common/ProgressBar";
@@ -29,7 +30,7 @@ export function RunnerHeader({ stage, index, onBack }: Props) {
             ‹ 中断
           </Link>
           <p className="min-w-0 flex-1 truncate text-center text-[13px] font-bold text-paper-100">
-            <span style={{ color: stage.accent }}>第{stage.id}章</span> {stage.title}
+            <span style={{ color: stage.accent }}>{stageTag(stage)}</span> {stage.title}
           </p>
           <button
             type="button"

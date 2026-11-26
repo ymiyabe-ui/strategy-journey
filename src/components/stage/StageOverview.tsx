@@ -7,6 +7,7 @@ import { Stars } from "@/components/common/Stars";
 import { TopBar } from "@/components/common/TopBar";
 import { getTerm } from "@/data/glossary";
 import { getStage } from "@/data/stages";
+import { stageEyebrow, stageTag } from "@/lib/stageLabel";
 import { useProgress } from "@/lib/progress";
 import { Timeline, TermPreview } from "./OverviewParts";
 
@@ -45,7 +46,7 @@ export function StageOverview({ stageId }: { stageId: number }) {
 
   return (
     <div className="min-h-dvh pb-40">
-      <TopBar title={`第${stage.id}章`} backHref="/map" backLabel="地図" />
+      <TopBar title={stageTag(stage)} backHref="/map" backLabel="地図" />
 
       <main className="mx-auto max-w-2xl space-y-5 px-4 pt-6">
         <motion.header
@@ -67,7 +68,7 @@ export function StageOverview({ stageId }: { stageId: number }) {
             {stage.icon}
           </motion.div>
           <p className="mt-4 text-[12px] font-extrabold tracking-[0.3em]" style={{ color: stage.accent }}>
-            CHAPTER {stage.id}
+            {stageEyebrow(stage)}
           </p>
           <h1 className="font-display mt-1 text-[34px] font-extrabold leading-tight text-paper-50">{stage.title}</h1>
           <p className="mt-1 text-[14px] font-bold text-paper-200">{stage.subtitle}</p>
@@ -100,9 +101,11 @@ export function StageOverview({ stageId }: { stageId: number }) {
           <Timeline stage={stage} sceneIndex={p.sceneIndex} cleared={p.cleared} />
         </Panel>
 
-        <Panel title="出会う用語">
-          <TermPreview stage={stage} unlocked={state.terms} glossaryName={(k) => getTerm(k)?.term} />
-        </Panel>
+        {stage.termPreview.length > 0 && (
+          <Panel title="出会う用語">
+            <TermPreview stage={stage} unlocked={state.terms} glossaryName={(k) => getTerm(k)?.term} />
+          </Panel>
+        )}
 
         <Panel title="獲得できる視点">
           <div className="flex items-center gap-4">
@@ -125,7 +128,7 @@ export function StageOverview({ stageId }: { stageId: number }) {
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-2 px-4">
           {!ready ? null : !unlocked ? (
             <>
-              <p className="text-[12.5px] font-bold text-paper-200">🔒 第{stage.id - 1}章をクリアすると開きます</p>
+              <p className="text-[12.5px] font-bold text-paper-200">🔒 {stage.final ? "6つの章をすべてクリアすると開きます" : `第${stage.id - 1}章をクリアすると開きます`}</p>
               <ButtonLink href="/map" variant="secondary" size="lg" className="w-full max-w-sm">
                 地図にもどる
               </ButtonLink>
@@ -140,7 +143,7 @@ export function StageOverview({ stageId }: { stageId: number }) {
           ) : (
             <div className="flex w-full max-w-sm flex-col gap-2">
               <Button size="lg" onClick={() => start(!inProgress)}>
-                {p.cleared ? "もう一度読む ›" : inProgress ? "つづきから ›" : "この章をはじめる ›"}
+                {p.cleared ? "もう一度読む ›" : inProgress ? "つづきから ›" : stage.final ? "最終試験をはじめる ›" : "この章をはじめる ›"}
               </Button>
               {inProgress && (
                 <button type="button" onClick={() => start(true)} className="text-[12.5px] font-bold text-paper-300/70 underline-offset-4 hover:underline">
