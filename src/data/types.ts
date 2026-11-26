@@ -71,12 +71,35 @@ export interface ForceItem {
   note?: string;
 }
 
+export interface LadderStep {
+  /** 頭文字（V・R・I・O など） */
+  letter: string;
+  name: string;
+  question: string;
+  /** 「いいえ」だったときの結論 */
+  no: string;
+  /** ひだまり亭などの具体例 */
+  example?: string;
+}
+
+export interface MatrixRow {
+  name: string;
+  emoji: string;
+  /** columns と同じ順番の判定 */
+  marks: ("yes" | "no" | "maybe")[];
+  verdict: string;
+  tone: "good" | "mid" | "bad";
+  note?: string;
+}
+
 export type Block =
   | { type: "p"; text: string }
   | { type: "callout"; tone: CalloutTone; title: string; text: string }
   | { type: "compare"; left: CompareSide; right: CompareSide; caption?: string }
   | { type: "chain"; title?: string; nodes: ChainNode[]; caption?: string }
   | { type: "map"; title?: string; regions: MapRegion[] }
+  | { type: "ladder"; title?: string; steps: LadderStep[]; goal: { label: string; text: string } }
+  | { type: "matrix"; title?: string; columns: string[]; rows: MatrixRow[] }
   | {
       type: "forces";
       title?: string;

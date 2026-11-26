@@ -8,6 +8,8 @@ import { ChainBlock } from "./ChainBlock";
 import { ClashBlock } from "./ClashBlock";
 import { CompareBlock } from "./CompareBlock";
 import { ForcesBlock } from "./ForcesBlock";
+import { LadderBlock } from "./LadderBlock";
+import { MatrixBlock } from "./MatrixBlock";
 import { SchoolMapBlock } from "./SchoolMapBlock";
 
 /** 解説ページの部品を、種類ごとに描き分ける */
@@ -35,6 +37,10 @@ export function BlockRenderer({ block }: { block: Block }) {
       return <SchoolMapBlock title={block.title} regions={block.regions} />;
     case "forces":
       return <ForcesBlock title={block.title} center={block.center} forces={block.forces} />;
+    case "ladder":
+      return <LadderBlock title={block.title} steps={block.steps} goal={block.goal} />;
+    case "matrix":
+      return <MatrixBlock title={block.title} columns={block.columns} rows={block.rows} />;
     case "clash":
       return <ClashBlock title={block.title} items={block.items} />;
     case "nana":
