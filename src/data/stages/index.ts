@@ -2,10 +2,11 @@ import type { Stage, StageId } from "@/data/types";
 import { stage1 } from "./stage1";
 import { stage2 } from "./stage2";
 import { stage3 } from "./stage3";
+import { stage4 } from "./stage4";
 import { stagesComing } from "./meta";
 
 /** 6つのステージ。公開済み（status: ready）は scenes を持ち、準備中は紹介だけ */
-export const STAGES: Stage[] = [stage1, stage2, stage3, ...stagesComing];
+export const STAGES: Stage[] = [stage1, stage2, stage3, stage4, ...stagesComing];
 
 export const STAGE_IDS: StageId[] = STAGES.map((s) => s.id);
 

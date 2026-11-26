@@ -7,6 +7,7 @@ import { Callout, Formula, ListBlock, NanaSays } from "./BlockParts";
 import { ChainBlock } from "./ChainBlock";
 import { ClashBlock } from "./ClashBlock";
 import { CompareBlock } from "./CompareBlock";
+import { ForcesBlock } from "./ForcesBlock";
 import { SchoolMapBlock } from "./SchoolMapBlock";
 
 /** 解説ページの部品を、種類ごとに描き分ける */
@@ -32,6 +33,8 @@ export function BlockRenderer({ block }: { block: Block }) {
       return <ChainBlock title={block.title} nodes={block.nodes} caption={block.caption} />;
     case "map":
       return <SchoolMapBlock title={block.title} regions={block.regions} />;
+    case "forces":
+      return <ForcesBlock title={block.title} center={block.center} forces={block.forces} />;
     case "clash":
       return <ClashBlock title={block.title} items={block.items} />;
     case "nana":

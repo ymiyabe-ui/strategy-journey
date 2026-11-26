@@ -60,12 +60,30 @@ export interface MapRegion {
   schools: MapSchool[];
 }
 
+export interface ForceItem {
+  name: string;
+  emoji: string;
+  /** その力のひとこと説明 */
+  gist: string;
+  /** 強さの目安（具体例の場面で使う） */
+  level?: "high" | "mid" | "low";
+  /** 具体例（ひだまり亭ならどうか、など） */
+  note?: string;
+}
+
 export type Block =
   | { type: "p"; text: string }
   | { type: "callout"; tone: CalloutTone; title: string; text: string }
   | { type: "compare"; left: CompareSide; right: CompareSide; caption?: string }
   | { type: "chain"; title?: string; nodes: ChainNode[]; caption?: string }
   | { type: "map"; title?: string; regions: MapRegion[] }
+  | {
+      type: "forces";
+      title?: string;
+      center: ForceItem;
+      /** 順番は 新規参入・売り手・買い手・代替品 */
+      forces: [ForceItem, ForceItem, ForceItem, ForceItem];
+    }
   | { type: "clash"; title?: string; items: { a: string; b: string; result: string }[] }
   | { type: "nana"; text: string; mood?: Mood }
   | { type: "list"; style: "bullet" | "number" | "check"; title?: string; items: string[] }
