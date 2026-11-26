@@ -6,6 +6,7 @@ import type { ChoiceScene } from "@/data/types";
 import { Button } from "@/components/common/Button";
 import { countMatches, isMatch, pickEnding } from "@/lib/choice";
 import { useProgress } from "@/lib/progress";
+import { Rich } from "@/lib/text";
 import { ActionBar } from "../ActionBar";
 import { ChoiceBrief } from "../ChoiceBrief";
 import { ChoiceEndingCard } from "../ChoiceEnding";
@@ -119,7 +120,7 @@ export function ChoiceSceneView({
               <h2 className="font-display mt-1.5 text-[21px] font-extrabold leading-[1.5] text-ink-900">
                 {step.title.replace(/^ステップ\d ── /, "")}
               </h2>
-              <p className="mt-2 text-[14.5px] leading-[1.9] text-ink-700">{step.question}</p>
+              <p className="mt-2 text-[14.5px] leading-[1.9] text-ink-700"><Rich text={step.question} /></p>
               <div className="mt-4 space-y-2.5">
                 {step.options.map((o, i) => (
                   <OptionCard

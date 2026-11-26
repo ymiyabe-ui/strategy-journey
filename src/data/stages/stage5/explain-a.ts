@@ -18,7 +18,7 @@ export const explainRbv: ExplainScene = {
         emoji: "🔭",
         items: [
           "どこで戦うか、どの立ち位置に立つか",
-          "戦場（5つの力）は、儲かる形をしているか",
+          "戦場（五つの力）は、儲かる形をしているか",
           "出発点は「外の環境」",
           "ポジショニング派の見方",
         ],
@@ -47,7 +47,7 @@ export const explainRbv: ExplainScene = {
       type: "chain",
       title: "外と内を、つなげる",
       nodes: [
-        { label: "戦場を読む（5つの力）", emoji: "🔭" },
+        { label: "戦場を読む（五つの力）", emoji: "🔭" },
         { label: "自分の武器を知る（内側の資源）", emoji: "🗡️", linkLabel: "そのうえで" },
         { label: "戦場と武器が合う勝ち方を選ぶ", emoji: "🧩", tone: "goal", linkLabel: "だから" },
       ],

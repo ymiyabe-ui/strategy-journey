@@ -85,7 +85,7 @@ export function QuadBlock({
           </section>
         ))}
       </div>
-      {caption && <p className="mt-3 text-center text-[12px] font-bold leading-[1.7] text-ink-600">{caption}</p>}
+      {caption && <p className="mt-3 text-center text-[12px] font-bold leading-[1.7] text-ink-600"><Rich text={caption} /></p>}
     </figure>
   );
 }

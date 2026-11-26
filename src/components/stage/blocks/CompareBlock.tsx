@@ -59,7 +59,7 @@ export function CompareBlock({ left, right, caption }: { left: CompareSide; righ
           <Side side={right} highlight />
         </motion.div>
       </div>
-      {caption && <p className="mt-2 text-center text-[12.5px] font-bold text-ink-600">{caption}</p>}
+      {caption && <p className="mt-2 text-center text-[12.5px] font-bold text-ink-600"><Rich text={caption} /></p>}
     </div>
   );
 }

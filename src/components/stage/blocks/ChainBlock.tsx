@@ -69,7 +69,7 @@ export function ChainBlock({ title, nodes, caption }: Props) {
           );
         })}
       </ol>
-      {caption && <p className="mt-3 text-center text-[12.5px] font-bold text-ink-600">{caption}</p>}
+      {caption && <p className="mt-3 text-center text-[12.5px] font-bold text-ink-600"><Rich text={caption} /></p>}
     </figure>
   );
 }
