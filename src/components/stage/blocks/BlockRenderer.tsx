@@ -10,6 +10,7 @@ import { CompareBlock } from "./CompareBlock";
 import { ForcesBlock } from "./ForcesBlock";
 import { LadderBlock } from "./LadderBlock";
 import { MatrixBlock } from "./MatrixBlock";
+import { QuadBlock } from "./QuadBlock";
 import { SchoolMapBlock } from "./SchoolMapBlock";
 
 /** 解説ページの部品を、種類ごとに描き分ける */
@@ -41,6 +42,8 @@ export function BlockRenderer({ block }: { block: Block }) {
       return <LadderBlock title={block.title} steps={block.steps} goal={block.goal} />;
     case "matrix":
       return <MatrixBlock title={block.title} columns={block.columns} rows={block.rows} />;
+    case "quad":
+      return <QuadBlock title={block.title} rows={block.rows} cols={block.cols} cells={block.cells} caption={block.caption} />;
     case "clash":
       return <ClashBlock title={block.title} items={block.items} />;
     case "nana":

@@ -4,10 +4,10 @@ import { stage2 } from "./stage2";
 import { stage3 } from "./stage3";
 import { stage4 } from "./stage4";
 import { stage5 } from "./stage5";
-import { stagesComing } from "./meta";
+import { stage6 } from "./stage6";
 
-/** 6つのステージ。公開済み（status: ready）は scenes を持ち、準備中は紹介だけ */
-export const STAGES: Stage[] = [stage1, stage2, stage3, stage4, stage5, ...stagesComing];
+/** 6つのステージ（すべて本編あり）。新しい章を足すときは、ここに並べる。準備中の章は status: "coming" で紹介だけ置ける */
+export const STAGES: Stage[] = [stage1, stage2, stage3, stage4, stage5, stage6];
 
 export const STAGE_IDS: StageId[] = STAGES.map((s) => s.id);
 

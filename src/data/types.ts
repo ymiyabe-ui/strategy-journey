@@ -92,6 +92,17 @@ export interface MatrixRow {
   note?: string;
 }
 
+export interface QuadCell {
+  /** 頭文字や記号（S・W・O・T、S×O など） */
+  tag: string;
+  name: string;
+  /** 出どころ・位置づけ（「第5章の武器」など） */
+  from?: string;
+  /** 中身（短い項目を並べる） */
+  items: string[];
+  tone: "sea" | "coral" | "lantern" | "sky";
+}
+
 export type Block =
   | { type: "p"; text: string }
   | { type: "callout"; tone: CalloutTone; title: string; text: string }
@@ -100,6 +111,17 @@ export type Block =
   | { type: "map"; title?: string; regions: MapRegion[] }
   | { type: "ladder"; title?: string; steps: LadderStep[]; goal: { label: string; text: string } }
   | { type: "matrix"; title?: string; columns: string[]; rows: MatrixRow[] }
+  | {
+      type: "quad";
+      title?: string;
+      /** 行の見出し（上・下） */
+      rows: [string, string];
+      /** 列の見出し（左・右） */
+      cols: [string, string];
+      /** 左上・右上・左下・右下の順 */
+      cells: [QuadCell, QuadCell, QuadCell, QuadCell];
+      caption?: string;
+    }
   | {
       type: "forces";
       title?: string;
